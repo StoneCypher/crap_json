@@ -30,6 +30,22 @@ gen_ascii_list() ->
 
 
 
+gen_unicode_char() -> % WRONG whargarbl todo
+
+    proper_types:range(0,255).
+
+
+
+
+
+gen_unicode_list() ->
+
+    proper_types:list(gen_unicode_char()).
+
+
+
+
+
 prop_any_int_yields_binary() ->
 
    ?FORALL( Int, proper_types:integer(), is_binary(crap_json:to_json(Int)) ).
@@ -112,13 +128,18 @@ to_json_test_() ->
         { "Empty string",                                 ?_assert( <<"\"\"">>        =:= crap_json:to_json("")                  ) },
         { "ASCII one-char string",                        ?_assert( <<"\"a\"">>       =:= crap_json:to_json("a")                 ) },
         { "ASCII string",                                 ?_assert( <<"\"abc ABC\"">> =:= crap_json:to_json("abc ABC")           ) },
+        { "Unicode one-char string",                      ?_assert( <<"\"a\"">>       =:= crap_json:to_json([28450])             ) },
+        { "Unicode string",                               ?_assert( <<"\"abc ABC\"">> =:= crap_json:to_json([27721,35821])       ) },
+
+        { "PL Obj",                                 ?_assert( <<"\"abc ABC\"">> =:= crap_json:to_json("abc ABC")           ) },
+
 % todo  { "Chinese one-char string",                      ?_assert( <<"\"abc ABC\"">> =:= crap_json:to_json("abc ABC")           ) }, whargarbl
 % todo  { "Chinese string",                               ?_assert( <<"\"abc ABC\"">> =:= crap_json:to_json("abc ABC")           ) },
 % todo arabic thai hindi math music emoji mixed-contents stoch-contents + 1ch variants + other oddity + zalgo variants
 
-        { "Stochastic: any integer yields binary",        ?_assert( proper:quickcheck(prop_any_int_yields_binary())     ) },
-        { "Stochastic: any float yields binary",          ?_assert( proper:quickcheck(prop_any_float_yields_binary())   ) },
-        { "Stochastic: any ASCII list yields binary",     ?_assert( proper:quickcheck(prop_any_ascii_yields_binary())   ) },
-        { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_ascii_result_right_length()) ) }
+        { "Stochastic: any integer yields binary",        ?_assert( proper:quickcheck(prop_any_int_yields_binary())              ) },
+        { "Stochastic: any float yields binary",          ?_assert( proper:quickcheck(prop_any_float_yields_binary())            ) },
+        { "Stochastic: any ASCII list yields binary",     ?_assert( proper:quickcheck(prop_any_ascii_yields_binary())            ) },
+        { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_ascii_result_right_length())          ) }
 
     ] }.

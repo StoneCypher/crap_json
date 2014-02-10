@@ -41,17 +41,18 @@ escape_string(String) ->
 
 
 
-escape_char($\b)           -> "\\b";
-escape_char($\f)           -> "\\f";
-escape_char($\n)           -> "\\n";
-escape_char($\r)           -> "\\r";
-escape_char($\t)           -> "\\t";
-escape_char($\v)           -> "\\v";
-escape_char($\0)           -> "\\0";
-escape_char($\\)           -> "\\\\";
-escape_char($")            -> "\\\"";
-escape_char($')            -> "\\'";
-escape_char(C) when C < 32 -> "\\" ++ integer_to_list(C);
+escape_char($\b)            -> "\\b";
+escape_char($\f)            -> "\\f";
+escape_char($\n)            -> "\\n";
+escape_char($\r)            -> "\\r";
+escape_char($\t)            -> "\\t";
+escape_char($\v)            -> "\\v";
+escape_char($\0)            -> "\\0";
+escape_char($\\)            -> "\\\\";
+escape_char($")             -> "\\\"";
+escape_char($')             -> "\\'";
+escape_char(C) when C < 32  -> "\\x" ++ integer_to_list(C, 16);
+escape_char(C) when C > 255 -> "\\u" ++ integer_to_list(C, 16);
 escape_char(OtherChar)     -> OtherChar.
 
 
