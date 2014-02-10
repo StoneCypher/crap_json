@@ -51,8 +51,8 @@ escape_char($\0)            -> "\\0";
 escape_char($\\)            -> "\\\\";
 escape_char($")             -> "\\\"";
 escape_char($')             -> "\\'";
-escape_char(C) when C < 32  -> "\\x" ++ integer_to_list(C, 16);
 escape_char(C) when C > 255 -> "\\u" ++ integer_to_list(C, 16);
+escape_char(C) when C < 32  -> "\\x" ++ integer_to_list(C, 16);
 escape_char(OtherChar)     -> OtherChar.
 
 
@@ -75,7 +75,7 @@ to_json(Float) when is_float(Float) ->
 
 
 
-% todo: proplist notation
+% whargarbl todo: tuple -> array notation
 
 to_json([]) ->
 
