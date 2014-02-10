@@ -48,7 +48,7 @@ gen_unicode_char() -> % WRONG whargarbl todo
         {{16#100000, 16#10ffff}, 16}  % supplementary private use area b
     ]),
 
-    sc:rand_between(Lo, Hi).
+    proper_types:range(Lo, Hi).
 
 
 
