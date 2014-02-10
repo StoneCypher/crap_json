@@ -84,6 +84,28 @@ to_json([]) ->
 
 
 
+to_json([ {K, _V} | _ ] = List) when is_list(K) ->
+
+    SobStr = fun    % huhu, String Or Binary -> String = my sob story; forces not-other-types
+        (X) when is_binary(X) -> binary_to_list(X);
+        (X) when is_list(X)   -> X
+    end,
+
+    Weld = fun(IK, IV) ->
+        SK = to_json(SobStr(IK)), 
+        JV = to_json(IV), 
+        << SK/binary, <<":">>/binary, JV/binary >>
+    end,
+
+    [ _ | BL ] = lists:flatten([ [ <<",">>, Weld(LK, LV) ] || {LK, LV} <- List ]),  % incomplete
+    B = binary:list_to_bin(BL),
+    
+    << <<"{">>/binary, B/binary, <<"}">>/binary >>;
+
+
+
+
+
 to_json([N | _ ] = List) when is_list(List), is_integer(N) ->
 
     B = list_to_binary(escape_string(List)),
