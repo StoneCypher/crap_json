@@ -52,6 +52,23 @@ For detailed usage see the docs that I probably haven't written yet.
 
 11> crap_json:to_json(undefined).
 <<"undefined">>
+
+12> io:format("~s~n", [crap_json:to_json( [ {"height", "2in"}, {"width", "3in"} ]) ]).
+{"height":"2in","width":"3in"}
+
+13> io:format("~s~n", [
+  crap_json:to_json( [ 
+    {"name","John Smith"}, 
+    {"powers", [ 
+      {"sharpshooter", 3}, 
+      {"seduce", 4} 
+    ]}, 
+    { "realname", undefined }, 
+    { "license to kill", true } 
+  ]) 
+]). 
+{"name":"John Smith","powers":{"sharpshooter":3,"seduce":4},"realname":undefined,"license to kill":true}
+![](ParseOfObj.png)
 ```
 
 
