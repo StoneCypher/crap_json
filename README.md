@@ -90,6 +90,9 @@ Proplists as Objects
 ]). 
 {"name":"John Smith","powers":{"sharpshooter":5,"drive":4},"realname":undefined,"license to kill":true}
 ```
+
+... the latter of which Chrome Debugger parses thusly:
+
 ![](ParseOfObj.png)
 
 Tuples as Arrays
