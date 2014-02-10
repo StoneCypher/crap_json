@@ -35,20 +35,20 @@ gen_unicode_char() -> % WRONG whargarbl todo
     % http://en.wikipedia.org/wiki/List_of_Unicode_characters
     % All valid ranges, weighted by size, so that individual characters are equivalently likely
 
-    { Lo, Hi } = sc:random_from_weighted([
-        {{16#000000, 16#00ffff}, 16}, % basic multilingual plane
-        {{16#010000, 16#013fff},  4}, % supplementary multilingual plane A
-        {{16#016000, 16#016fff},  1}, % supplementary multilingual plane B
-        {{16#01b000, 16#01bfff},  1}, % supplementary multilingual plane C
-        {{16#01d000, 16#01ffff},  3}, % supplementary multilingual plane D
-        {{16#020000, 16#02bfff}, 12}, % supplementary ideographic plane A
-        {{16#02f000, 16#02ffff},  1}, % supplementary ideographic plane B
-        {{16#0e0000, 16#0e0fff},  1}, % supplementary special purpose plane
-        {{16#0f0000, 16#0fffff}, 16}, % supplementary private use area A
-        {{16#100000, 16#10ffff}, 16}  % supplementary private use area b
-    ]),
+    proper_types:weighted_union( [
 
-    proper_types:range(Lo, Hi).
+        {16, proper_types:range(16#000000, 16#00ffff)}, % basic multilingual plane
+        {4,  proper_types:range(16#010000, 16#013fff)}, % supplementary multilingual plane A
+        {1,  proper_types:range(16#016000, 16#016fff)}, % supplementary multilingual plane B
+        {1,  proper_types:range(16#01b000, 16#01bfff)}, % supplementary multilingual plane C
+        {3,  proper_types:range(16#01d000, 16#01ffff)}, % supplementary multilingual plane D
+        {12, proper_types:range(16#020000, 16#02bfff)}, % supplementary ideographic plane A
+        {1,  proper_types:range(16#02f000, 16#02ffff)}, % supplementary ideographic plane B
+        {1,  proper_types:range(16#0e0000, 16#0e0fff)}, % supplementary special purpose plane
+        {16, proper_types:range(16#0f0000, 16#0fffff)}, % supplementary private use area A
+        {16, proper_types:range(16#100000, 16#10ffff)}  % supplementary private use area b
+
+    ] ).
 
 
 
@@ -81,6 +81,14 @@ prop_any_float_yields_binary() ->
 prop_any_ascii_yields_binary() ->
 
    ?FORALL( Ascii, gen_ascii_list(), is_binary(crap_json:to_json(Ascii)) ).
+
+
+
+
+
+prop_any_unicode_yields_binary() ->
+
+   ?FORALL( Ascii, gen_unicode_list(), is_binary(crap_json:to_json(Ascii)) ).
 
 
 
@@ -156,6 +164,7 @@ to_json_test_() ->
         { "Stochastic: any integer yields binary",        ?_assert( proper:quickcheck(prop_any_int_yields_binary())                       ) },
         { "Stochastic: any float yields binary",          ?_assert( proper:quickcheck(prop_any_float_yields_binary())                     ) },
         { "Stochastic: any ASCII list yields binary",     ?_assert( proper:quickcheck(prop_any_ascii_yields_binary())                     ) },
+        { "Stochastic: any Unicode list yields binary",   ?_assert( proper:quickcheck(prop_any_unicode_yields_binary())                   ) },
         { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_ascii_result_right_length())                   ) }
 
     ] }.
