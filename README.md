@@ -14,6 +14,48 @@ Thus (choral music) another piece o' crap was born.
 
 
 
+Usage
+=====
+
+For detailed usage see the docs that I probably haven't written yet.
+
+```erlang
+1> crap_json:to_json("a").
+<<"\"a\"">>
+
+2> crap_json:to_json("abc def").
+<<"\"abc def\"">>
+
+3> crap_json:to_json("abc \r \n def").
+<<"\"abc \\r \\n def\"">>
+
+4> crap_json:to_json(1).              
+<<"1">>
+
+5> crap_json:to_json(-1).
+<<"-1">>
+
+6> crap_json:to_json(-2.5).
+<<"-2.5">>
+
+7> crap_json:to_json(0.1).      % good handling of rounding error
+<<"0.1">>
+
+8> crap_json:to_json(true).                                      
+<<"true">>
+
+9> crap_json:to_json(false).
+<<"false">>
+
+10> crap_json:to_json(null). 
+<<"null">>
+
+11> crap_json:to_json(undefined).
+<<"undefined">>
+```
+
+
+
 The Good
 --------
 
