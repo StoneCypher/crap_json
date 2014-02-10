@@ -19,6 +19,9 @@ Usage
 
 For detailed usage see the docs that I probably haven't written yet.
 
+Text
+----
+
 ```erlang
 1> crap_json:to_json("a").
 <<"\"a\"">>
@@ -29,32 +32,78 @@ For detailed usage see the docs that I probably haven't written yet.
 3> crap_json:to_json("abc \r \n def").
 <<"\"abc \\r \\n def\"">>
 
-4> crap_json:to_json(1).              
+4> crap_json:to_json("汉语").         
+<<"\"\\u6C49\\u8BED\"">>
+```
+
+Numbers
+-------
+
+```erlang
+5> crap_json:to_json(1).              
 <<"1">>
 
-5> crap_json:to_json(-1).
+6> crap_json:to_json(-1).
 <<"-1">>
 
-6> crap_json:to_json(-2.5).
+7> crap_json:to_json(-2.5).
 <<"-2.5">>
 
-7> crap_json:to_json(0.1).      % good handling of rounding error
+8> crap_json:to_json(0.1).      % good handling of rounding error
 <<"0.1">>
+```
 
-8> crap_json:to_json(true).                                      
+Atoms as JS keywords
+--------------------
+
+```erlang
+9> crap_json:to_json(true).                                      
 <<"true">>
 
-9> crap_json:to_json(false).
+10> crap_json:to_json(false).
 <<"false">>
 
-10> crap_json:to_json(null). 
+11> crap_json:to_json(null). 
 <<"null">>
 
-11> crap_json:to_json(undefined).
+12> crap_json:to_json(undefined).
 <<"undefined">>
 ```
 
+Proplists as Objects
+--------------------
 
+```erlang
+13> io:format("~s~n", [crap_json:to_json( [ {"height", "2in"}, {"width", "3in"} ]) ]).
+{"height":"2in","width":"3in"}
+
+14> io:format("~s~n", [
+  crap_json:to_json( [ 
+    {"name","John Smith"}, 
+    {"powers", [ 
+      {"sharpshooter", 5}, 
+      {"drive", 4} 
+    ]}, 
+    { "realname", undefined }, 
+    { "license to kill", true } 
+  ]) 
+]). 
+{"name":"John Smith","powers":{"sharpshooter":5,"drive":4},"realname":undefined,"license to kill":true}
+```
+
+... the latter of which Chrome Debugger parses thusly:
+
+![](ParseOfObj.png)
+
+Tuples as Arrays
+----------------
+
+todo whargarbl
+
+The Verdict
+===========
+
+Okay, so how's it look?
 
 The Good
 --------
