@@ -81,14 +81,14 @@ Proplists as Objects
   crap_json:to_json( [ 
     {"name","John Smith"}, 
     {"powers", [ 
-      {"sharpshooter", 3}, 
-      {"seduce", 4} 
+      {"sharpshooter", 5}, 
+      {"drive", 4} 
     ]}, 
     { "realname", undefined }, 
     { "license to kill", true } 
   ]) 
 ]). 
-{"name":"John Smith","powers":{"sharpshooter":3,"seduce":4},"realname":undefined,"license to kill":true}
+{"name":"John Smith","powers":{"sharpshooter":5,"drive":4},"realname":undefined,"license to kill":true}
 ```
 ![](ParseOfObj.png)
 
