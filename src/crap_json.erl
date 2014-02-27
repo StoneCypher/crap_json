@@ -75,8 +75,6 @@ to_json(Float) when is_float(Float) ->
 
 
 
-% whargarbl todo: tuple -> array notation
-
 to_json({}) ->
 
     <<"[]">>;
@@ -84,6 +82,8 @@ to_json({}) ->
 
 
 
+
+% whargarbl todo: tuple -> array notation
 
 to_json([]) ->
 
