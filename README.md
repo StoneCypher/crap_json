@@ -67,6 +67,8 @@ Atoms as JS keywords
 <<"null">>
 ```
 
+(This list used to contain `undefined`, because the encoder used to handle it.  That's not correct; despite being a JS keyword, JSON doesn't have it.  Removed.  Thanks, Gocy.)
+
 Proplists as Objects
 --------------------
 
