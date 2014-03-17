@@ -54,7 +54,7 @@ escape_char($")             -> "\\\"";
 escape_char($')             -> "\\'";
 escape_char(C) when C > 255 -> "\\u" ++ integer_to_list(C, 16);
 escape_char(C) when C < 32  -> "\\x" ++ integer_to_list(C, 16);
-escape_char(OtherChar)     -> OtherChar.
+escape_char(OtherChar)     -> [OtherChar].
 
 
 

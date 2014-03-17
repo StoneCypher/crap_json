@@ -88,7 +88,15 @@ prop_any_ascii_yields_binary() ->
 
 prop_any_unicode_yields_binary() ->
 
-   ?FORALL( Ascii, gen_unicode_list(), is_binary(crap_json:to_json(Ascii)) ).
+   ?FORALL( Unicode, gen_unicode_list(), is_binary(crap_json:to_json(Unicode)) ).
+
+
+
+
+
+prop_any_unicode_character_encodes_to_a_list() ->
+
+   ?FORALL( UnicodeChar, gen_unicode_char(), is_list(crap_json:escape_char(UnicodeChar)) ).
 
 
 
@@ -140,6 +148,23 @@ escape_string_test_() ->
 escape_char_test_() ->
 
     { "escape_char tests", [
+
+        { "backspace",       ?_assert( "\\b"    =:= crap_json:escape_char($\b) ) },
+        { "form feed",       ?_assert( "\\f"    =:= crap_json:escape_char($\f) ) },
+        { "newline",         ?_assert( "\\n"    =:= crap_json:escape_char($\n) ) },
+        { "carriage return", ?_assert( "\\r"    =:= crap_json:escape_char($\r) ) },
+        { "tab",             ?_assert( "\\t"    =:= crap_json:escape_char($\t) ) },
+        { "vertical tab",    ?_assert( "\\v"    =:= crap_json:escape_char($\v) ) },
+        { "null",            ?_assert( "\\0"    =:= crap_json:escape_char($\0) ) },
+        { "backslash",       ?_assert( "\\\\"   =:= crap_json:escape_char($\\) ) },
+        { "single quote",    ?_assert( "\\\'"   =:= crap_json:escape_char($\') ) },
+        { "double quote",    ?_assert( "\\\""   =:= crap_json:escape_char($\") ) },
+        { "low ascii",       ?_assert( "\\xE"   =:= crap_json:escape_char(14)  ) },
+        { "high unicode",    ?_assert( "\\u12C" =:= crap_json:escape_char(300) ) },
+        { "capital D",       ?_assert( "D"      =:= crap_json:escape_char($D)  ) },
+
+        { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_any_unicode_character_encodes_to_a_list()) ) }
+
     ] }.
 
 
