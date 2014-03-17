@@ -1,0 +1,15 @@
+%% -*- mode: erlang -*-
+{application, crap_json,
+ [
+  {description, "CRAP JSON"},
+  {vsn, "0.0.1"},
+  {registered, []},
+  {applications, [
+                  kernel,
+                  stdlib
+                 ]},
+  %% uncomment if this is an active application
+  %% {mod, { crap_json_app, []}},
+  {env, []}
+ ]}.
+%% vim: set filetype=erlang tabstop=2
