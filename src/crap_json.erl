@@ -10,6 +10,7 @@
     to_json/1,
 
     escape_string/1,
+      escape_char/1,
 
     test/0,
       test/1
@@ -83,7 +84,16 @@ to_json({}) ->
 
 
 
-% whargarbl todo: tuple -> array notation
+to_json(T) when is_tuple(T) ->
+
+    % first doesn't get a comma before it, so special rules
+    [ First | Rest ] = tuple_to_list(T),
+
+    binary:list_to_bin([ <<"[">>, to_json(First) ] ++ [ [ <<",">>, to_json(Rem) ] || Rem <- Rest ] ++ [<<"]">>]);
+
+
+
+
 
 to_json([]) ->
 

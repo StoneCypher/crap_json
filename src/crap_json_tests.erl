@@ -128,6 +128,24 @@ prop_ascii_result_right_length() ->
 
 
 
+escape_string_test_() ->
+
+    { "escape_string tests", [
+    ] }.
+
+
+
+
+
+escape_char_test_() ->
+
+    { "escape_char tests", [
+    ] }.
+
+
+
+
+
 to_json_test_() ->
 
     { "to_json tests", [
