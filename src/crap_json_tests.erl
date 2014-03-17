@@ -186,38 +186,42 @@ to_json_test_() ->
 
     { "to_json tests", [
 
-        { "true",                                         ?_assert( <<"true">>                      =:= crap_json:to_json(true)                  ) },
-        { "false",                                        ?_assert( <<"false">>                     =:= crap_json:to_json(false)                 ) },
-        { "null",                                         ?_assert( <<"null">>                      =:= crap_json:to_json(null)                  ) },
+        { "true",                                         ?_assert( <<"true">>                        =:= crap_json:to_json(true)                      ) },
+        { "false",                                        ?_assert( <<"false">>                       =:= crap_json:to_json(false)                     ) },
+        { "null",                                         ?_assert( <<"null">>                        =:= crap_json:to_json(null)                      ) },
 
-        { "Int Zero",                                     ?_assert( <<"0">>                         =:= crap_json:to_json(0)                     ) },
-        { "Int Two",                                      ?_assert( <<"2">>                         =:= crap_json:to_json(2)                     ) },
-        { "Int Neg Two",                                  ?_assert( <<"-2">>                        =:= crap_json:to_json(-2)                    ) },
+        { "Int Zero",                                     ?_assert( <<"0">>                           =:= crap_json:to_json(0)                         ) },
+        { "Int Two",                                      ?_assert( <<"2">>                           =:= crap_json:to_json(2)                         ) },
+        { "Int Neg Two",                                  ?_assert( <<"-2">>                          =:= crap_json:to_json(-2)                        ) },
 
-        { "Float Zero",                                   ?_assert( <<"0.0">>                       =:= crap_json:to_json(0.0)                   ) },
-        { "Float Two",                                    ?_assert( <<"2.0">>                       =:= crap_json:to_json(2.0)                   ) },
-        { "Float Neg Two",                                ?_assert( <<"-2.0">>                      =:= crap_json:to_json(-2.0)                  ) },
-        { "Float Two Point Five",                         ?_assert( <<"2.5">>                       =:= crap_json:to_json(2.5)                   ) },
-        { "Float Neg Two Point Five",                     ?_assert( <<"-2.5">>                      =:= crap_json:to_json(-2.5)                  ) },
-        { "Float Zero Point One",                         ?_assert( <<"0.1">>                       =:= crap_json:to_json(0.1)                   ) },
-        { "Float Neg Zero Point One",                     ?_assert( <<"-0.1">>                      =:= crap_json:to_json(-0.1)                  ) },
+        { "Float Zero",                                   ?_assert( <<"0.0">>                         =:= crap_json:to_json(0.0)                       ) },
+        { "Float Two",                                    ?_assert( <<"2.0">>                         =:= crap_json:to_json(2.0)                       ) },
+        { "Float Neg Two",                                ?_assert( <<"-2.0">>                        =:= crap_json:to_json(-2.0)                      ) },
+        { "Float Two Point Five",                         ?_assert( <<"2.5">>                         =:= crap_json:to_json(2.5)                       ) },
+        { "Float Neg Two Point Five",                     ?_assert( <<"-2.5">>                        =:= crap_json:to_json(-2.5)                      ) },
+        { "Float Zero Point One",                         ?_assert( <<"0.1">>                         =:= crap_json:to_json(0.1)                       ) },
+        { "Float Neg Zero Point One",                     ?_assert( <<"-0.1">>                        =:= crap_json:to_json(-0.1)                      ) },
 
-        { "Empty string",                                 ?_assert( <<"\"\"">>                      =:= crap_json:to_json("")                    ) },
-        { "ASCII one-char string",                        ?_assert( <<"\"a\"">>                     =:= crap_json:to_json("a")                   ) },
-        { "ASCII string",                                 ?_assert( <<"\"abc ABC\"">>               =:= crap_json:to_json("abc ABC")             ) },
+        { "Empty string",                                 ?_assert( <<"\"\"">>                        =:= crap_json:to_json("")                        ) },
+        { "ASCII one-char string",                        ?_assert( <<"\"a\"">>                       =:= crap_json:to_json("a")                       ) },
+        { "ASCII string",                                 ?_assert( <<"\"abc ABC\"">>                 =:= crap_json:to_json("abc ABC")                 ) },
 
-        { "Unicode one-char string",                      ?_assert( <<"\"\\u6F22\"">>               =:= crap_json:to_json([28450])               ) }, % chinese
-        { "Unicode string",                               ?_assert( <<"\"\\u6C49\\u8BED\"">>        =:= crap_json:to_json([27721,35821])         ) }, % chinese
+        { "Unicode one-char string",                      ?_assert( <<"\"\\u6F22\"">>                 =:= crap_json:to_json([28450])                   ) }, % chinese
+        { "Unicode string",                               ?_assert( <<"\"\\u6C49\\u8BED\"">>          =:= crap_json:to_json([27721,35821])             ) }, % chinese
 % todo arabic thai hindi math music emoji mixed-contents stoch-contents + 1ch variants + other oddity + zalgo variants
 
-        { "PL Obj 1-prop",                                ?_assert( <<"{\"a\":\"b\"}">>             =:= crap_json:to_json([{"a","b"}])           ) },
-        { "PL Obj 2-prop",                                ?_assert( <<"{\"a\":\"b\",\"c\":\"d\"}">> =:= crap_json:to_json([{"a","b"},{"c","d"}]) ) },
+        { "PL Obj 1-prop",                                ?_assert( <<"{\"a\":\"b\"}">>               =:= crap_json:to_json([{"a","b"}])               ) },
+        { "PL Obj 2-prop",                                ?_assert( <<"{\"a\":\"b\",\"c\":\"d\"}">>   =:= crap_json:to_json([{"a","b"},{"c","d"}])     ) },
+
+        { "Tuple array, empty",                           ?_assert( <<"[]">>                          =:= crap_json:to_json({})                        ) },
+        { "{1,2,3}",                                      ?_assert( <<"[1,2,3]">>                     =:= crap_json:to_json({1,2,3})                   ) },
+        { "{1,true,\"foo\",{{3,null}}}",                  ?_assert( <<"[1,true,\"foo\",[[3,null]]]">> =:= crap_json:to_json({1,true,"foo",{{3,null}}}) ) },
 
 
-        { "Stochastic: any integer yields binary",        ?_assert( proper:quickcheck(prop_any_int_yields_binary())                       ) },
-        { "Stochastic: any float yields binary",          ?_assert( proper:quickcheck(prop_any_float_yields_binary())                     ) },
-        { "Stochastic: any ASCII list yields binary",     ?_assert( proper:quickcheck(prop_any_ascii_yields_binary())                     ) },
-        { "Stochastic: any Unicode list yields binary",   ?_assert( proper:quickcheck(prop_any_unicode_yields_binary())                   ) },
-        { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_ascii_result_right_length())                   ) }
+        { "Stochastic: any integer yields binary",        ?_assert( proper:quickcheck(prop_any_int_yields_binary())                                    ) },
+        { "Stochastic: any float yields binary",          ?_assert( proper:quickcheck(prop_any_float_yields_binary())                                  ) },
+        { "Stochastic: any ASCII list yields binary",     ?_assert( proper:quickcheck(prop_any_ascii_yields_binary())                                  ) },
+        { "Stochastic: any Unicode list yields binary",   ?_assert( proper:quickcheck(prop_any_unicode_yields_binary())                                ) },
+        { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_ascii_result_right_length())                                ) }
 
     ] }.
