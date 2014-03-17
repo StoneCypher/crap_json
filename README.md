@@ -67,6 +67,8 @@ Atoms as JS keywords
 <<"null">>
 ```
 
+(This list used to contain `undefined`, because the encoder used to handle it.  That's not correct; despite being a JS keyword, JSON doesn't have it.  Removed.  Thanks, Gocy.)
+
 Proplists as Objects
 --------------------
 
@@ -95,11 +97,13 @@ Proplists as Objects
 Tuples as Arrays
 ----------------
 
+```erlang
 14> crap_json:to_json( {1,2,3} ).
 <<"[1,2,3]">>
 
 15> crap_json:to_json( {1, {2,3}, {true,false,null} } ).
 <<"[1,[2,3],[true,false,null]]">>
+```
 
 Erlang e17 Maps
 ---------------
