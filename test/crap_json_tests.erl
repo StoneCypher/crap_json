@@ -1,4 +1,3 @@
-
 -module(crap_json_tests).
 -compile(export_all).
 
@@ -9,6 +8,8 @@
 %% any other `gen_` stochastic generator, if you want to see what it makes.
 %%
 %% `crap_json:test()` or `crap_json:test(quiet)` to test.  Tests require [PropEr](https://github.com/manopapad/proper).
+%%
+%% @TODO whargarbl still wants single language test cases
 
 
 
