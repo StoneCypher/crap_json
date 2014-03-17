@@ -8,7 +8,7 @@
 %% @doc Tests for `crap_json:`.  You can call `proper_gen:sample( crap_json_tests:gen_ascii_list() )` or 
 %% any other `gen_` stochastic generator, if you want to see what it makes.
 %%
-%% `crap_json:test()` or `crap_json:test(quiet)` to test.  Requires PropEr.  todo whargarbl add link to proper
+%% `crap_json:test()` or `crap_json:test(quiet)` to test.  Tests require [PropEr](https://github.com/manopapad/proper).
 
 
 
@@ -30,7 +30,7 @@ gen_ascii_list() ->
 
 
 
-gen_unicode_char() -> % WRONG whargarbl todo
+gen_unicode_char() ->
 
     % http://en.wikipedia.org/wiki/List_of_Unicode_characters
     % All valid ranges, weighted by size, so that individual characters are equivalently likely
@@ -140,9 +140,15 @@ escape_string_test_() ->
 
     { "escape_string tests", [
 
-        { "empty string", ?_assert( ""    =:= crap_json:escape_string("")    ) },
-        { "a",            ?_assert( "a"   =:= crap_json:escape_string("a")   ) },
-        { "abc",          ?_assert( "abc" =:= crap_json:escape_string("abc") ) }
+        { "empty string", ?_assert( ""            =:= crap_json:escape_string("")                  ) },
+        { "a",            ?_assert( "a"           =:= crap_json:escape_string("a")                 ) },
+        { "abc",          ?_assert( "abc"         =:= crap_json:escape_string("abc")               ) },
+        { "\\r",          ?_assert( "\\r"         =:= crap_json:escape_string("\r")                ) },
+        { "\\n",          ?_assert( "\\n"         =:= crap_json:escape_string("\n")                ) },
+        { "\\r\\n",       ?_assert( "\\r\\n"      =:= crap_json:escape_string("\r\n")              ) },
+        { "a\\bc",        ?_assert( "a\\bc"       =:= crap_json:escape_string("a\bc")              ) },
+        { "\\vc\\r",      ?_assert( "\\vc\\r"     =:= crap_json:escape_string("\vc\r")             ) },
+        { "BC(zh)DE",     ?_assert( "BC\\u6F22DE" =:= crap_json:escape_string([66,67,28450,68,69]) ) }  % chinese
 
     ] }.
 
