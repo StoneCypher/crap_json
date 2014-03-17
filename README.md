@@ -95,11 +95,13 @@ Proplists as Objects
 Tuples as Arrays
 ----------------
 
+```erlang
 14> crap_json:to_json( {1,2,3} ).
 <<"[1,2,3]">>
 
 15> crap_json:to_json( {1, {2,3}, {true,false,null} } ).
 <<"[1,[2,3],[true,false,null]]">>
+```
 
 Erlang e17 Maps
 ---------------
