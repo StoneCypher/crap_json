@@ -139,6 +139,11 @@ prop_ascii_result_right_length() ->
 escape_string_test_() ->
 
     { "escape_string tests", [
+
+        { "empty string", ?_assert( ""    =:= crap_json:escape_string("")    ) },
+        { "a",            ?_assert( "a"   =:= crap_json:escape_string("a")   ) },
+        { "abc",          ?_assert( "abc" =:= crap_json:escape_string("abc") ) }
+
     ] }.
 
 
@@ -163,7 +168,7 @@ escape_char_test_() ->
         { "high unicode",    ?_assert( "\\u12C" =:= crap_json:escape_char(300) ) },
         { "capital D",       ?_assert( "D"      =:= crap_json:escape_char($D)  ) },
 
-        { "Stochastic: ASCII list result correct length", ?_assert( proper:quickcheck(prop_any_unicode_character_encodes_to_a_list()) ) }
+        { "Stochastic: any ASCII or unicode character escapes to a list", ?_assert( proper:quickcheck(prop_any_unicode_character_encodes_to_a_list()) ) }
 
     ] }.
 
