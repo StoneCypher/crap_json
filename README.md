@@ -65,19 +65,16 @@ Atoms as JS keywords
 
 11> crap_json:to_json(null). 
 <<"null">>
-
-12> crap_json:to_json(undefined).
-<<"undefined">>
 ```
 
 Proplists as Objects
 --------------------
 
 ```erlang
-13> io:format("~s~n", [crap_json:to_json( [ {"height", "2in"}, {"width", "3in"} ]) ]).
+12> io:format("~s~n", [crap_json:to_json( [ {"height", "2in"}, {"width", "3in"} ]) ]).
 {"height":"2in","width":"3in"}
 
-14> io:format("~s~n", [
+13> io:format("~s~n", [
   crap_json:to_json( [ 
     {"name","John Smith"}, 
     {"powers", [ 
@@ -98,7 +95,18 @@ Proplists as Objects
 Tuples as Arrays
 ----------------
 
-todo whargarbl
+14> crap_json:to_json( {1,2,3} ).
+<<"[1,2,3]">>
+
+15> crap_json:to_json( {1, {2,3}, {true,false,null} } ).
+<<"[1,[2,3],[true,false,null]]">>
+
+Erlang e17 Maps
+---------------
+
+Haven't done these yet.
+
+
 
 The Verdict
 ===========

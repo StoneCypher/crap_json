@@ -23,10 +23,12 @@
 
 %% @doc World's garbage-est to-JSON encoder.  Uni-directional.  Assumes all lists of integers are 
 %% strings.  Assumes all 2-ary proplists are objects.  Assumes all tuples are arrays.  Represents
-%% integers and floats.  Converts binaries to strings (!).  Atoms true, false, null, and undefined
-%% are converted to the equivalent literals; others catch fire and die.  Nests sanely from tuples
-%% and proplists *only*.  Will flatten improper iolists.  Dies violently on any other type (ports, 
-%% PIDs, references, etc.)
+%% integers and floats.  Converts binaries to strings (!).  Atoms true, false, and null are 
+%% converted to the equivalent literals; others catch fire and die (JSON does not have undefined; 
+%% thanks Gocy).  Nests sanely from tuples and proplists *only*.  Will flatten improper iolists.
+%% Dies violently on any other type (ports, PIDs, references, etc.)
+%%
+%% The new Erlang type "maps" have not yet been handled.
 %%
 %% TODO: should probably treat maps and records as objects.  Lazy.
 

@@ -183,7 +183,6 @@ to_json_test_() ->
         { "true",                                         ?_assert( <<"true">>                      =:= crap_json:to_json(true)                  ) },
         { "false",                                        ?_assert( <<"false">>                     =:= crap_json:to_json(false)                 ) },
         { "null",                                         ?_assert( <<"null">>                      =:= crap_json:to_json(null)                  ) },
-        { "undefined",                                    ?_assert( <<"undefined">>                 =:= crap_json:to_json(undefined)             ) },
 
         { "Int Zero",                                     ?_assert( <<"0">>                         =:= crap_json:to_json(0)                     ) },
         { "Int Two",                                      ?_assert( <<"2">>                         =:= crap_json:to_json(2)                     ) },
