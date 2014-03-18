@@ -1,7 +1,16 @@
 crap_json
 =========
 
-A crap JSON dumper for Erlang.  Takes some liberties.  Reasonably tested.
+A crap JSON dumper for Erlang.  Takes some liberties.  Reasonably tested.  Test cases use [PropEr](https://github.com/manopapad/proper).
+
+
+
+Current Library Status: *Usable*
+--------------------------------
+
+This library is considered to be production level correct, but is probably not production level fast.
+
+Improvements will be gladly accepted.
 
 
 
@@ -15,15 +24,6 @@ Thus (choral music) another piece o' crap was born.
 This library is not intended to convert all Erlang terms to JSON.  It makes no attempt to handle references, ports, PIDs, e17 maps, et cetera.
 
 This library is *only* intended to provide an export point for JSON which covers all of JSON.  If you want to say something that JSON can say, this library has a single well defined notation in Erlang terms that can support you.  Also, I hope that you find that notation brief and convenient.
-
-
-
-Current Library Status: *Usable*
---------------------------------
-
-This library is considered to be production level correct, but is probably not production level fast.
-
-Improvements will be gladly accepted.
 
 
 
@@ -91,7 +91,7 @@ Proplists as Objects
 
 13> io:format("~s~n", [
   crap_json:to_json( [ 
-    {"name","John Smith"}, 
+    {"name","James Bond"}, 
     {"powers", [ 
       {"sharpshooter", 5}, 
       {"drive", 4} 
@@ -100,7 +100,7 @@ Proplists as Objects
     { "license to kill", true } 
   ]) 
 ]). 
-{"name":"John Smith","powers":{"sharpshooter":5,"drive":4},"realname":undefined,"license to kill":true}
+{"name":"James Bond","powers":{"sharpshooter":5,"drive":4},"realname":undefined,"license to kill":true}
 ```
 
 ... the latter of which Chrome Debugger parses thusly:
