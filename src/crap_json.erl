@@ -105,16 +105,17 @@ to_json([]) ->
 
 
 
-to_json([ {K, _V} | _ ] = List) when is_list(K) ->
+to_json([ {K, _V} | _ ] = List) when is_list(K); is_atom(K); is_binary(K) ->
 
-    SobStr = fun    % huhu, String Or Binary -> String = my sob story; forces not-other-types
+    LBoAStr = fun    % huhu, String Or Binary -> String = my sob story; forces not-other-types
+        (X) when is_list(X)   -> X;
         (X) when is_binary(X) -> binary_to_list(X);
-        (X) when is_list(X)   -> X
+        (X) when is_atom(X)   -> atom_to_list(X)
     end,
 
     Weld = fun(IK, IV) ->
-        SK = to_json(SobStr(IK)), 
-        JV = to_json(IV), 
+        SK = to_json(LBoAStr(IK)),
+        JV = to_json(IV),
         << SK/binary, <<":">>/binary, JV/binary >>
     end,
 
@@ -139,7 +140,6 @@ to_json([N | _ ] = List) when is_list(List), is_integer(N) ->
 to_json(true)      -> <<"true">>;
 to_json(false)     -> <<"false">>;
 to_json(null)      -> <<"null">>;
-to_json(undefined) -> <<"undefined">>;
 
 
 
