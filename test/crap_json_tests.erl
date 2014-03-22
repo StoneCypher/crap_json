@@ -207,6 +207,10 @@ to_json_test_() ->
         { "ASCII one-char string",                        ?_assert( <<"\"a\"">>                       =:= crap_json:to_json("a")                       ) },
         { "ASCII string",                                 ?_assert( <<"\"abc ABC\"">>                 =:= crap_json:to_json("abc ABC")                 ) },
 
+        { "Empty binary string",                          ?_assert( <<"\"\"">>                        =:= crap_json:to_json(<<"">>)                    ) },
+        { "ASCII binary one-char string",                 ?_assert( <<"\"a\"">>                       =:= crap_json:to_json(<<"a">>)                   ) },
+        { "ASCII binary string",                          ?_assert( <<"\"abc ABC\"">>                 =:= crap_json:to_json(<<"abc ABC">>)             ) },
+
         { "Unicode one-char string",                      ?_assert( <<"\"\\u6F22\"">>                 =:= crap_json:to_json([28450])                   ) }, % chinese
         { "Unicode string",                               ?_assert( <<"\"\\u6C49\\u8BED\"">>          =:= crap_json:to_json([27721,35821])             ) }, % chinese
 % todo arabic thai hindi math music emoji mixed-contents stoch-contents + 1ch variants + other oddity + zalgo variants
