@@ -32,6 +32,12 @@
 
 
 
+-type json_kw() :: true | false | null.
+
+
+
+
+
 %% @doc <span style="color: green; font-weight: bold;">Tested</span> Escapes a string for use in JSON; unicode safe. ```1> crap_json:escape_string("a").
 %% "a"
 %%
@@ -116,7 +122,7 @@ escape_char(OtherChar)     -> [OtherChar].
 %%
 %% 26 unit tests (special characters, chinese, keywords, various types) and five stochastic tests (any int, float, ascii string, unicode string escapes to a binary; length of result checking.)
 
--spec to_json(Term :: int() | float() | tuple() | list() | binary() | true | false | null) -> binary().
+-spec to_json(Term :: integer() | float() | tuple() | list() | binary() | json_kw()) -> binary().
 
 to_json(Int) when is_integer(Int) ->
 
