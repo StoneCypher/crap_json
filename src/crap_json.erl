@@ -32,7 +32,7 @@
 
 
 
-%% @doc Escapes a string for use in JSON. ```1> crap_json:escape_string("a").
+%% @doc <span style="color: green; font-weight: bold;">Tested</span> Escapes a string for use in JSON; unicode safe. ```1> crap_json:escape_string("a").
 %% "a"
 %%
 %% 2> crap_json:escape_string("abc def").
@@ -43,6 +43,10 @@
 %%
 %% 4> crap_json:escape_string("汉语").
 %% "\\u6C49\\u8BED"'''
+%%
+%% Nine unit tests (special characters and one Chinese character.)
+
+-spec escape_string(String::list()) -> list().
 
 escape_string(String) ->
 
@@ -51,6 +55,19 @@ escape_string(String) ->
 
 
 
+
+%% @doc <span style="color: #0a3; font-weight: bold;">Stoch tested</span> Escapes a single character for use in JSON; unicode safe. ```1> crap_json:escape_char($a).
+%% "a"
+%%
+%% 2> crap_json:escape_char($汉).
+%% "\\u6C49"
+%%
+%% 3> crap_json:escape_char($\r).
+%% "\\r"'''
+%%
+%% Thirteen unit tests (mostly special characters) and one stochastic test (any character escapes to a list.)
+
+-spec escape_char(Char::non_neg_integer()) -> list().
 
 escape_char($\b)            -> "\\b";
 escape_char($\f)            -> "\\f";
