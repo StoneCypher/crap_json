@@ -33,8 +33,24 @@
 
 
 -type json_kw()             :: true | false | null.
+-type json_array()          :: [] | [json_term()].
+-type json_object()         :: [] | [{json_escaped_string(), json_term()}].
+-type json_term()           :: Term :: integer() | float() | json_object() | json_array() | binary() | json_kw().
 -type json_escaped_string() :: list().
 -type json_escaped_binary() :: binary().
+
+
+
+
+
+-export_type([
+    json_kw/0,
+    json_array/0,
+    json_object/0,
+    json_term/0,
+    json_escaped_string/0,
+    json_escaped_binary/0
+]).
 
 
 
