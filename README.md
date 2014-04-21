@@ -45,7 +45,7 @@ Text
 3> crap_json:to_json("abc \r \n def").
 <<"\"abc \\r \\n def\"">>
 
-4> crap_json:to_json("汉语").         
+4> crap_json:to_json("汉语").
 <<"\"\\u6C49\\u8BED\"">>
 ```
 
@@ -53,7 +53,7 @@ Numbers
 -------
 
 ```erlang
-5> crap_json:to_json(1).              
+5> crap_json:to_json(1).
 <<"1">>
 
 6> crap_json:to_json(-1).
@@ -70,7 +70,7 @@ Atoms as JS keywords
 --------------------
 
 ```erlang
-9> crap_json:to_json(true).                                      
+9> crap_json:to_json(true).
 <<"true">>
 
 10> crap_json:to_json(false).

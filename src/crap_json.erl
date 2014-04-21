@@ -1,4 +1,15 @@
 
+%% @doc World's garbage-est to-JSON encoder.  Uni-directional.  Assumes all lists of integers are 
+%% strings.  Assumes all 2-ary proplists are objects.  Assumes all tuples are arrays.  Represents
+%% integers and floats.  Converts binaries to strings (!).  Atoms true, false, and null are 
+%% converted to the equivalent literals; others catch fire and die (JSON does not have undefined; 
+%% thanks Gocy).  Nests sanely from tuples and proplists *only*.  Will flatten improper iolists.
+%% Dies violently on any other type (ports, PIDs, references, etc.)
+%%
+%% The new Erlang type "maps" have not yet been handled.
+%%
+%% TODO: should probably treat maps and records as objects.  Lazy.
+
 -module(crap_json).
 
 
@@ -21,20 +32,17 @@
 
 
 
-%% @doc World's garbage-est to-JSON encoder.  Uni-directional.  Assumes all lists of integers are 
-%% strings.  Assumes all 2-ary proplists are objects.  Assumes all tuples are arrays.  Represents
-%% integers and floats.  Converts binaries to strings (!).  Atoms true, false, and null are 
-%% converted to the equivalent literals; others catch fire and die (JSON does not have undefined; 
-%% thanks Gocy).  Nests sanely from tuples and proplists *only*.  Will flatten improper iolists.
-%% Dies violently on any other type (ports, PIDs, references, etc.)
+%% @doc Escapes a string for use in JSON. ```1> crap_json:escape_string("a").
+%% "a"
 %%
-%% The new Erlang type "maps" have not yet been handled.
+%% 2> crap_json:escape_string("abc def").
+%% "abc def"
 %%
-%% TODO: should probably treat maps and records as objects.  Lazy.
-
-
-
-
+%% 3> crap_json:escape_string("abc \r \n def").
+%% "abc \\r \\n def"
+%%
+%% 4> crap_json:escape_string("汉语").
+%% "\\u6C49\\u8BED"'''
 
 escape_string(String) ->
 
