@@ -8,6 +8,10 @@
 %%
 %% The new Erlang type "maps" have not yet been handled.
 %%
+%% @author John Haugeland
+%% @copyright 2014 all rights reserved by John Haugeland
+%% @version 1.0.0
+%%
 %% TODO: should probably treat maps and records as objects.  Lazy.
 
 -module(crap_json).
