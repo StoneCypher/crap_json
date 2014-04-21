@@ -87,6 +87,37 @@ escape_char(OtherChar)     -> [OtherChar].
 
 
 
+%% @doc <span style="color: #0a3; font-weight: bold;">Stoch tested</span> Escapes a single character for use in JSON; unicode safe. ```1> crap_json:to_json("a").
+%% <<"\"a\"">>
+%%
+%% 2> crap_json:to_json("abc \r \n def").
+%% <<"\"abc \\r \\n def\"">>
+%%
+%% 3> crap_json:to_json("汉语").
+%% <<"\"\\u6C49\\u8BED\"">>
+%%
+%% 4> crap_json:to_json(1).
+%% <<"1">>
+%%
+%% 5> crap_json:to_json(0.1).      % good handling of rounding error
+%% <<"0.1">>
+%%
+%% 6> crap_json:to_json(true).
+%% <<"true">>
+%%
+%% 7> crap_json:to_json( [ {"height", "2in"}, {"width", "3in"} ]).
+%% <<"{\"height\":\"2in\",\"width\":\"3in\"}">>
+%%
+%% 8> crap_json:to_json( {1,2,3} ).
+%% <<"[1,2,3]">>
+%%
+%% 9> crap_json:to_json( {1, {2,3}, {true,false,null} } ).
+%% <<"[1,[2,3],[true,false,null]]">>'''
+%%
+%% 26 unit tests (special characters, chinese, keywords, various types) and five stochastic tests (any int, float, ascii string, unicode string escapes to a binary; length of result checking.)
+
+-spec to_json(Term :: int() | float() | tuple() | list() | binary() | true | false | null) -> binary().
+
 to_json(Int) when is_integer(Int) ->
 
     integer_to_binary(Int);
