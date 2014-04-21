@@ -290,6 +290,11 @@ test() ->
 
 
 
+%% @doc Runs the test cases verbosely or quietly.  Verbosely is as shown above. ```1> crap_json:test(quiet).  
+%%   All 54 tests passed.
+%% ok'''
+
+-spec test(quiet | verbose) -> ok | error.
 
 test(quiet) ->
 
