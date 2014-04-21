@@ -1,0 +1,4 @@
+%% encoding: UTF-8
+{application,crap_json}.
+{packages,[]}.
+{modules,[crap_json,crap_json_app,crap_json_sup]}.
