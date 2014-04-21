@@ -209,6 +209,80 @@ to_json(Binary) when is_binary(Binary) ->
 
 
 
+%% @doc Runs the test cases verbosely. ```1> crap_json:test().
+%% ======================== EUnit ========================
+%% module 'crap_json'
+%%   module 'crap_json_tests'
+%%     escape_string tests
+%%       crap_json_tests:144: escape_string_test_ (empty string)...ok
+%%       crap_json_tests:145: escape_string_test_ (a)...ok
+%%       crap_json_tests:146: escape_string_test_ (abc)...ok
+%%       crap_json_tests:147: escape_string_test_ (\r)...ok
+%%       crap_json_tests:148: escape_string_test_ (\n)...ok
+%%       crap_json_tests:149: escape_string_test_ (\r\n)...ok
+%%       crap_json_tests:150: escape_string_test_ (a\bc)...ok
+%%       crap_json_tests:151: escape_string_test_ (\vc\r)...ok
+%%       crap_json_tests:152: escape_string_test_ (BC(zh)DE)...ok
+%%       [done in 0.140 s]
+%%     escape_char tests
+%%       crap_json_tests:164: escape_char_test_ (backspace)...ok
+%%       crap_json_tests:165: escape_char_test_ (form feed)...ok
+%%       crap_json_tests:166: escape_char_test_ (newline)...ok
+%%       crap_json_tests:167: escape_char_test_ (carriage return)...ok
+%%       crap_json_tests:168: escape_char_test_ (tab)...ok
+%%       crap_json_tests:169: escape_char_test_ (vertical tab)...ok
+%%       crap_json_tests:170: escape_char_test_ (null)...ok
+%%       crap_json_tests:171: escape_char_test_ (backslash)...ok
+%%       crap_json_tests:172: escape_char_test_ (single quote)...ok
+%%       crap_json_tests:173: escape_char_test_ (double quote)...ok
+%%       crap_json_tests:174: escape_char_test_ (low ascii)...ok
+%%       crap_json_tests:175: escape_char_test_ (high unicode)...ok
+%%       crap_json_tests:176: escape_char_test_ (capital D)...ok
+%%       crap_json_tests:178: escape_char_test_ (Stochastic: any ASCII or unicode character escapes to a list)...[0.047 s] ok
+%%       [done in 0.266 s]
+%%     to_json tests
+%%       crap_json_tests:190: to_json_test_ (true)...ok
+%%       crap_json_tests:191: to_json_test_ (false)...ok
+%%       crap_json_tests:192: to_json_test_ (null)...ok
+%%       crap_json_tests:194: to_json_test_ (Int Zero)...ok
+%%       crap_json_tests:195: to_json_test_ (Int Two)...ok
+%%       crap_json_tests:196: to_json_test_ (Int Neg Two)...ok
+%%       crap_json_tests:198: to_json_test_ (Float Zero)...ok
+%%       crap_json_tests:199: to_json_test_ (Float Two)...ok
+%%       crap_json_tests:200: to_json_test_ (Float Neg Two)...ok
+%%       crap_json_tests:201: to_json_test_ (Float Two Point Five)...ok
+%%       crap_json_tests:202: to_json_test_ (Float Neg Two Point Five)...ok
+%%       crap_json_tests:203: to_json_test_ (Float Zero Point One)...ok
+%%       crap_json_tests:204: to_json_test_ (Float Neg Zero Point One)...ok
+%%       crap_json_tests:206: to_json_test_ (Empty string)...ok
+%%       crap_json_tests:207: to_json_test_ (ASCII one-char string)...ok
+%%       crap_json_tests:208: to_json_test_ (ASCII string)...ok
+%%       crap_json_tests:210: to_json_test_ (Empty binary string)...ok
+%%       crap_json_tests:211: to_json_test_ (ASCII binary one-char string)...ok
+%%       crap_json_tests:212: to_json_test_ (ASCII binary string)...ok
+%%       crap_json_tests:214: to_json_test_ (Unicode one-char string)...ok
+%%       crap_json_tests:215: to_json_test_ (Unicode string)...ok
+%%       crap_json_tests:218: to_json_test_ (PL Obj 1-prop)...ok
+%%       crap_json_tests:219: to_json_test_ (PL Obj 2-prop)...ok
+%%       crap_json_tests:221: to_json_test_ (Tuple array, empty)...ok
+%%       crap_json_tests:222: to_json_test_ ({1,2,3})...ok
+%%       crap_json_tests:223: to_json_test_ ({1,true,"foo",{{3,null}}})...ok
+%%       crap_json_tests:226: to_json_test_ (Stochastic: any integer yields binary)...ok
+%%       crap_json_tests:227: to_json_test_ (Stochastic: any float yields binary)...ok
+%%       crap_json_tests:228: to_json_test_ (Stochastic: any ASCII list yields binary)...ok
+%%       crap_json_tests:229: to_json_test_ (Stochastic: any Unicode list yields binary)...ok
+%%       crap_json_tests:230: to_json_test_ (Stochastic: ASCII list result correct length)...ok
+%%       [done in 0.484 s]
+%%     [done in 0.890 s]
+%%   [done in 0.890 s]
+%% =======================================================
+%%   All 54 tests passed.
+%% ok'''
+%%
+%% Not test-worthy per se.  The above list may be out of date.  Run time for tests will vary by machine.
+
+-spec test() -> ok | error.
+
 test() ->
 
     test(verbose).
