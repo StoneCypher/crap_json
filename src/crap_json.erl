@@ -1,14 +1,18 @@
 
-%% @doc World's garbage-est to-JSON encoder.  Uni-directional.  Assumes all lists of integers are 
-%% strings.  Assumes all 2-ary proplists are objects.  Assumes all tuples are arrays.  Represents
-%% integers and floats.  Converts binaries to strings (!).  Atoms true, false, and null are 
-%% converted to the equivalent literals; others catch fire and die (JSON does not have undefined; 
-%% thanks Gocy).  Nests sanely from tuples and proplists *only*.  Will flatten improper iolists.
-%% Dies violently on any other type (ports, PIDs, references, etc.)
+%% @doc World's garbage-est to-JSON encoder.  
+%%
+%% You essentially always want {@link crap_json:to_json/1}.
+%%
+%% Uni-directional.  Assumes all lists of integers are strings.  Assumes all 2-ary proplists are
+%% objects.  Assumes all tuples are arrays.  Represents integers and floats.  Converts binaries
+%% to strings (!).  Atoms true, false, and null are converted to the equivalent literals; others
+%% catch fire and die (JSON does not have undefined; thanks Gocy).  Nests sanely from tuples and
+%% proplists *only*.  Will flatten improper iolists. Dies violently on any other type (ports, PIDs,
+%% references, etc.)
 %%
 %% The new Erlang type "maps" have not yet been handled.
 %%
-%% @author John Haugeland
+%% @author John Haugeland [http://fullof.bs/]
 %% @copyright 2014 all rights reserved by John Haugeland
 %% @version 1.0.0
 %%
@@ -141,6 +145,29 @@ escape_char(OtherChar)     -> [OtherChar].
 %%
 %% 9> crap_json:to_json( {1, {2,3}, {true,false,null} } ).
 %% <<"[1,[2,3],[true,false,null]]">>'''
+%%
+%% A simple example of nested use: ```1> Joe = [ {name,"Joe Smith"}, {position, "Programmer"}, {salary, 125000} ].             
+%% [{name,"Joe Smith"},{position,"Programmer"},{salary,125000}]
+%%
+%% 2> Becca = [ {name,"Becca Raymond"}, {position, "Programmer"}, {salary, 128000} ].
+%% [{name,"Becca Raymond"},
+%%  {position,"Programmer"},
+%%  {salary,128000}]
+%%
+%% 3> Pat = [ {name, "Pat Henry"}, {position, "Manager"}, {salary, 141000} ].        
+%% [{name,"Pat Henry"},{position,"Manager"},{salary,141000}]
+%%
+%% 4> Staff = { Joe, Becca, Pat }.
+%% {[{name,"Joe Smith"},
+%%   {position,"Programmer"},
+%%   {salary,125000}],
+%%  [{name,"Becca Raymond"},
+%%   {position,"Programmer"},
+%%   {salary,128000}],
+%%  [{name,"Pat Henry"},{position,"Manager"},{salary,141000}]}
+%%
+%% 5> crap_json:to_json(Staff).   
+%% <<"[{\"name\":\"Joe Smith\",\"position\":\"Programmer\",\"salary\":125000},{\"name\":\"Becca Raymond\",\"position\":\"Programmer\",\"salar"...>>'''
 %%
 %% 26 unit tests (special characters, chinese, keywords, various types) and five stochastic tests (any int, float, ascii string, unicode string escapes to a binary; length of result checking.)
 
