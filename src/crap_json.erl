@@ -32,7 +32,9 @@
 
 
 
--type json_kw() :: true | false | null.
+-type json_kw()             :: true | false | null.
+-type json_escaped_string() :: list().
+-type json_escaped_binary() :: binary().
 
 
 
@@ -52,7 +54,7 @@
 %%
 %% Nine unit tests (special characters and one Chinese character.)
 
--spec escape_string(String::list()) -> list().
+-spec escape_string(String::list()) -> json_escaped_string().
 
 escape_string(String) ->
 
@@ -73,7 +75,7 @@ escape_string(String) ->
 %%
 %% Thirteen unit tests (mostly special characters) and one stochastic test (any character escapes to a list.)
 
--spec escape_char(Char::non_neg_integer()) -> list().
+-spec escape_char(Char::non_neg_integer()) -> json_escaped_string().
 
 escape_char($\b)            -> "\\b";
 escape_char($\f)            -> "\\f";
@@ -122,7 +124,7 @@ escape_char(OtherChar)     -> [OtherChar].
 %%
 %% 26 unit tests (special characters, chinese, keywords, various types) and five stochastic tests (any int, float, ascii string, unicode string escapes to a binary; length of result checking.)
 
--spec to_json(Term :: integer() | float() | tuple() | list() | binary() | json_kw()) -> binary().
+-spec to_json(Term :: integer() | float() | tuple() | list() | binary() | json_kw()) -> json_escaped_binary().
 
 to_json(Int) when is_integer(Int) ->
 
