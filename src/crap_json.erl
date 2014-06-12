@@ -248,6 +248,14 @@ to_json([N | _ ] = List) when is_list(List), is_integer(N) ->
 
 
 
+to_json(L) when is_list(L) ->
+
+    throw("Proplists create JS objects; iolists and unicode lists create strings.  Other lists are errors.");
+
+
+
+
+
 to_json(true)      -> <<"true">>;
 to_json(false)     -> <<"false">>;
 to_json(null)      -> <<"null">>;

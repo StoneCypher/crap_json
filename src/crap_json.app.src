@@ -1,7 +1,7 @@
 %% -*- mode: erlang -*-
 {application, crap_json,
  [
-  {description, "CRAP JSON"},
+  {description, "crap json dumps json iolists from erlang datastructures"},
   {vsn, "0.0.1"},
   {registered, []},
   {applications, [
