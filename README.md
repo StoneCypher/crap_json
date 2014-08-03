@@ -6,7 +6,9 @@ A crap JSON dumper for Erlang.  Takes some liberties.  Reasonably tested.  Test 
 ![Language](http://img.shields.io/badge/Language-Erlang-000000.svg) &nbsp;
 ![Platform](http://img.shields.io/badge/Platform-OTP-000000.svg) &nbsp;
 ![License](http://img.shields.io/badge/License-MIT-000055.svg) &nbsp;
-![Status](http://img.shields.io/travis/StoneCypher/crap_json.svg)
+![Status](http://img.shields.io/travis/StoneCypher/crap_json.svg) &nbsp;
+![Release](http://img.shields.io/github/release/StoneCypher/crap_json.svg) &nbsp;
+[![Issues](http://img.shields.io/github/issues/StoneCypher/crap_json.svg)](https://github.com/StoneCypher/crap_json/issues)
 
 
 
