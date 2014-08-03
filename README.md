@@ -1,7 +1,12 @@
 crap_json
 =========
 
-A crap JSON dumper for Erlang.  Takes some liberties.  Reasonably tested.  Test cases use [PropEr](https://github.com/manopapad/proper).
+A crap JSON dumper for Erlang.  Takes some liberties.  Reasonably tested.  Test cases use [PropEr](https://github.com/manopapad/proper).  Requires Erlang R16 or greater.
+
+![Language](http://img.shields.io/badge/Language-Erlang-000000.svg) &nbsp;
+![Platform](http://img.shields.io/badge/Platform-OTP-000000.svg) &nbsp;
+![License](http://img.shields.io/badge/License-MIT-000055.svg) &nbsp;
+![Status](http://img.shields.io/travis/StoneCypher/crap_json.svg)
 
 
 
